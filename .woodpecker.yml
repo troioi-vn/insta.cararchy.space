@@ -23,17 +23,6 @@ steps:
           -d chat_id="$${TELEGRAM_CHAT_ID}" \
           --data-urlencode "text=$${message}"
 
-  debug_secret_presence:
-    image: alpine:3.22
-    environment:
-      TELEGRAM_BOT_TOKEN:
-        from_secret: TELEGRAM_BOT_TOKEN
-      TELEGRAM_CHAT_ID:
-        from_secret: TELEGRAM_CHAT_ID
-    commands:
-      - test -n "$${TELEGRAM_BOT_TOKEN}"
-      - test -n "$${TELEGRAM_CHAT_ID}"
-
   verify_docker_files:
     image: alpine:3.22
     commands:
