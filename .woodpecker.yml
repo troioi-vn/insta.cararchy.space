@@ -16,7 +16,11 @@ steps:
         curl -sS -X POST
         "https://api.telegram.org/bot$${TELEGRAM_BOT_TOKEN}/sendMessage"
         -d chat_id="$${TELEGRAM_CHAT_ID}"
-        -d text="STARTED: ${CI_REPO} | branch=${CI_COMMIT_BRANCH} | pipeline=#${CI_PIPELINE_NUMBER} | commit=${CI_COMMIT_SHA}"
+        --data-urlencode text="🚀 ${CI_REPO}
+Deployment started at $$(date -u +%H:%M:%S) UTC.
+Branch: ${CI_COMMIT_BRANCH}
+Pipeline: #${CI_PIPELINE_NUMBER}
+Commit: ${CI_COMMIT_SHA}"
 
   debug_secret_presence:
     image: alpine:3.22
@@ -59,7 +63,11 @@ steps:
         curl -sS -X POST
         "https://api.telegram.org/bot$${TELEGRAM_BOT_TOKEN}/sendMessage"
         -d chat_id="$${TELEGRAM_CHAT_ID}"
-        -d text="SUCCESS: ${CI_REPO} | branch=${CI_COMMIT_BRANCH} | pipeline=#${CI_PIPELINE_NUMBER} | commit=${CI_COMMIT_SHA}"
+        --data-urlencode text="✅ ${CI_REPO}
+Deployment finished at $$(date -u +%H:%M:%S) UTC.
+Branch: ${CI_COMMIT_BRANCH}
+Pipeline: #${CI_PIPELINE_NUMBER}
+Commit: ${CI_COMMIT_SHA}"
 
   notify_failure:
     image: curlimages/curl:8.16.0
@@ -77,4 +85,8 @@ steps:
         curl -sS -X POST
         "https://api.telegram.org/bot$${TELEGRAM_BOT_TOKEN}/sendMessage"
         -d chat_id="$${TELEGRAM_CHAT_ID}"
-        -d text="FAILED: ${CI_REPO} | branch=${CI_COMMIT_BRANCH} | pipeline=#${CI_PIPELINE_NUMBER} | commit=${CI_COMMIT_SHA}"
+        --data-urlencode text="❌ ${CI_REPO}
+Deployment failed at $$(date -u +%H:%M:%S) UTC.
+Branch: ${CI_COMMIT_BRANCH}
+Pipeline: #${CI_PIPELINE_NUMBER}
+Commit: ${CI_COMMIT_SHA}"
