@@ -1,7 +1,0 @@
-services:
-  web:
-    build: .
-    container_name: insta-catarchy-space
-    ports:
-      - "${HOST_PORT:-8081}:80"
-    restart: unless-stopped

@@ -1,5 +1,11 @@
 This is an Astro-based landing page for https://insta.catarchy.space.
 
+Production deployment is static:
+
+- Woodpecker builds the Astro site on `catarchy2`
+- the generated `dist/` files are copied to `/var/www/insta.catarchy.space/html`
+- NGINX serves the site directly from that directory
+
 ## Local development
 
 Install dependencies:
@@ -26,33 +32,4 @@ Preview the production build:
 
 ```bash
 npm run preview
-```
-
-## Run with Docker
-
-### Option 1: Docker Compose
-
-```bash
-docker compose up --build -d
-```
-
-Open http://localhost:8081
-
-If you want a different host port:
-
-```bash
-HOST_PORT=8090 docker compose up --build -d
-```
-
-Stop:
-
-```bash
-docker compose down
-```
-
-### Option 2: Plain Docker
-
-```bash
-docker build -t insta-catarchy-site .
-docker run --rm -p 8081:80 insta-catarchy-site
 ```

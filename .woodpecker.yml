@@ -26,14 +26,6 @@ steps:
           -d chat_id="$${TELEGRAM_CHAT_ID}" \
           --data-urlencode "text=$${message}"
 
-  verify_docker_files:
-    image: alpine:3.22
-    commands:
-      - test -f Dockerfile
-      - grep -q "^FROM node:22-alpine AS build$" Dockerfile
-      - grep -q "^FROM nginx:alpine$" Dockerfile
-      - grep -q 'HOST_PORT:-8081' docker-compose.yml
-
   verify_project_files:
     image: alpine:3.22
     commands:
@@ -41,7 +33,6 @@ steps:
       - test -f package-lock.json
       - test -f astro.config.mjs
       - test -f src/pages/index.astro
-      - test -f Dockerfile
       - grep -q "insta.catarchy.space" README.md
 
   build_site:
