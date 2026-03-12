@@ -1,0 +1,77 @@
+---
+import LinkCard from "../components/LinkCard.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { links } from "../data/links";
+---
+
+<BaseLayout title="Catarchy - links" description="Welcome to our space.">
+  <main class="container">
+    <section class="profile">
+      <h1>Catarchy</h1>
+      <p class="tagline">Welcome to our space</p>
+    </section>
+
+    <section class="links-grid" aria-label="Catarchy links">
+      {links.map((link) => <LinkCard {...link} />)}
+    </section>
+  </main>
+</BaseLayout>
+
+<style>
+  .container {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 48px 20px 56px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    animation: fade-in 0.8s ease-out;
+  }
+
+  .profile {
+    margin-bottom: 40px;
+    text-align: center;
+  }
+
+  h1 {
+    margin: 0 0 10px;
+    font-size: 2.5rem;
+    font-weight: 800;
+    letter-spacing: 1px;
+    background: linear-gradient(45deg, #fff, var(--primary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .tagline {
+    margin: 0;
+    color: var(--muted-text);
+    font-size: 1.1rem;
+  }
+
+  .links-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    width: 100%;
+  }
+
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @media (max-width: 480px) {
+    .container {
+      padding-top: 36px;
+    }
+  }
+</style>

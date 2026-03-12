@@ -1,6 +1,9 @@
 when:
   - event: [push, manual]
 
+labels:
+  hostname: a84032fdfe6e
+
 steps:
   notify_start:
     image: curlimages/curl:8.16.0
@@ -27,15 +30,35 @@ steps:
     image: alpine:3.22
     commands:
       - test -f Dockerfile
+      - grep -q "^FROM node:22-alpine AS build$" Dockerfile
       - grep -q "^FROM nginx:alpine$" Dockerfile
-      - grep -q '^      - "8080:80"$' docker-compose.yml
+      - grep -q 'HOST_PORT:-8081' docker-compose.yml
 
-  verify_files:
+  verify_project_files:
     image: alpine:3.22
     commands:
-      - test -f index.html
+      - test -f package.json
+      - test -f package-lock.json
+      - test -f astro.config.mjs
+      - test -f src/pages/index.astro
       - test -f Dockerfile
       - grep -q "insta.catarchy.space" README.md
+
+  build_site:
+    image: node:22-alpine
+    commands:
+      - npm ci
+      - npm run build
+
+  deploy_site:
+    image: alpine:3.22
+    commands:
+      - test -f dist/index.html
+      - find /deploy -mindepth 1 -maxdepth 1 -exec rm -rf {} +
+      - cp -a dist/. /deploy/
+      - test -f /deploy/index.html
+    volumes:
+      - /var/www/insta.catarchy.space/html:/deploy
 
   notify_success:
     image: curlimages/curl:8.16.0

@@ -1,0 +1,15 @@
+{
+  "name": "insta-catarchy-space",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev --host",
+    "start": "astro dev --host",
+    "build": "astro build",
+    "preview": "astro preview --host"
+  },
+  "devDependencies": {
+    "astro": "^5.5.5"
+  }
+}
