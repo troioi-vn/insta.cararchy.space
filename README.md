@@ -1,4 +1,4 @@
-This is an Astro-based landing page for https://insta.catarchy.space.
+This is an Astro-based landing page for https://insta.catarchy.space (uised as a landing page ftom the Catarchy Instagram account profile link).
 
 Production deployment is static:
 
