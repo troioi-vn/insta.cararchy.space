@@ -31,9 +31,5 @@ export const links: LinkItem[] = [
   {
     href: "https://www.youtube.com/catarchy",
     title: "YouTube"
-  },
-  {
-    href: "https://maps.app.goo.gl/fqPvyLtoZ1qeH4Pv6",
-    title: "Google Maps"
   }
 ];
