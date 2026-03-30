@@ -21,7 +21,7 @@ steps:
       - |
         start_epoch="$$(date -u +%s)"
         start_utc="$$(date -u +%Y-%m-%dT%H:%M:%SZ)"
-        commit_message_json="$$(printf '%s\n' "${CI_COMMIT_MESSAGE}" | head -n 1 | tr '\t' ' ' | tr -s ' ' | sed 's/^ //; s/ $//' | sed 's/\\/\\\\/g' | sed 's/\"/\\"/g')"
+        commit_message_json="$$(printf '%s\n' "${CI_COMMIT_MESSAGE}" | awk 'NR == 1 { gsub(/\t/, \" \"); gsub(/  +/, \" \"); sub(/^ /, \"\"); sub(/ $/, \"\"); gsub(/\\\\/, \"\\\\\\\\\"); gsub(/\"/, \"\\\\\\\"\"); print; exit }')"
         printf '%s\n' "$$start_epoch" > .woodpecker-deploy-start-epoch
 
         curl -sS -X POST \
@@ -91,7 +91,7 @@ steps:
         finish_epoch="$$(date -u +%s)"
         finish_utc="$$(date -u +%Y-%m-%dT%H:%M:%SZ)"
         start_epoch="$$(cat .woodpecker-deploy-start-epoch 2>/dev/null || true)"
-        commit_message_json="$$(printf '%s\n' "${CI_COMMIT_MESSAGE}" | head -n 1 | tr '\t' ' ' | tr -s ' ' | sed 's/^ //; s/ $//' | sed 's/\\/\\\\/g' | sed 's/\"/\\"/g')"
+        commit_message_json="$$(printf '%s\n' "${CI_COMMIT_MESSAGE}" | awk 'NR == 1 { gsub(/\t/, \" \"); gsub(/  +/, \" \"); sub(/^ /, \"\"); sub(/ $/, \"\"); gsub(/\\\\/, \"\\\\\\\\\"); gsub(/\"/, \"\\\\\\\"\"); print; exit }')"
         if [ -n "$$start_epoch" ]; then
           duration_seconds=$$((finish_epoch - start_epoch))
         else
@@ -142,7 +142,7 @@ steps:
         finish_epoch="$$(date -u +%s)"
         finish_utc="$$(date -u +%Y-%m-%dT%H:%M:%SZ)"
         start_epoch="$$(cat .woodpecker-deploy-start-epoch 2>/dev/null || true)"
-        commit_message_json="$$(printf '%s\n' "${CI_COMMIT_MESSAGE}" | head -n 1 | tr '\t' ' ' | tr -s ' ' | sed 's/^ //; s/ $//' | sed 's/\\/\\\\/g' | sed 's/\"/\\"/g')"
+        commit_message_json="$$(printf '%s\n' "${CI_COMMIT_MESSAGE}" | awk 'NR == 1 { gsub(/\t/, \" \"); gsub(/  +/, \" \"); sub(/^ /, \"\"); sub(/ $/, \"\"); gsub(/\\\\/, \"\\\\\\\\\"); gsub(/\"/, \"\\\\\\\"\"); print; exit }')"
         if [ -n "$$start_epoch" ]; then
           duration_seconds=$$((finish_epoch - start_epoch))
         else
