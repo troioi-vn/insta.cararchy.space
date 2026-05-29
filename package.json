@@ -10,6 +10,6 @@
     "preview": "astro preview --host"
   },
   "devDependencies": {
-    "astro": "^5.5.5"
+    "astro": "^6.4.2"
   }
 }

@@ -180,4 +180,4 @@ Pushes can trigger Woodpecker deployment for the static site on `catarchy2`. Tre
 
 | Dependency | Version |
 | ---------- | ------- |
-| Astro      | ^5.5.5  |
+| Astro      | ^6.4.2  |
