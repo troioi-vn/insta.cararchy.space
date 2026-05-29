@@ -2,9 +2,12 @@ This is an Astro-based landing page for https://insta.catarchy.space (used as a 
 
 Production deployment is static:
 
-- Woodpecker builds the Astro site on `catarchy2`
-- the generated `dist/` files are copied to `/var/www/insta.catarchy.space/html`
-- NGINX serves the site directly from that directory
+- CI builds the Astro site
+- the generated `dist/` files are copied to the configured web root
+- the target web server serves the site directly from that directory
+
+Environment-specific server names, SSH targets, and web-root paths are kept out
+of this public repository.
 
 ## Local development
 

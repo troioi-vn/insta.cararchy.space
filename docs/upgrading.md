@@ -167,7 +167,7 @@ If the upgrade taught us project-specific lessons, add them to this document.
 
 ## Deployment Note
 
-Pushes can trigger Woodpecker deployment for the static site on `catarchy2`. Treat dependency-upgrade pushes to `main` as potentially live deploys and verify the pipeline and public site afterward.
+Pushes can trigger Woodpecker deployment for the static site when CI/CD is configured. Treat dependency-upgrade pushes to deployment branches as potentially live deploys and verify the pipeline and public site afterward.
 
 ## What Not To Assume
 
