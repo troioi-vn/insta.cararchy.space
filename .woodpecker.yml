@@ -1,6 +1,9 @@
 when:
   - event: [push, manual]
 
+labels:
+  static-site-host: "true"
+
 steps:
   notify_start:
     image: curlimages/curl:8.16.0
